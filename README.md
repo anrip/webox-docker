@@ -12,8 +12,6 @@ This is a lightweight branch that contains only the following components:
 
 - php 5.6.x
 
-  - redis
-
 # Simple Usage
 
 ## The web server is listening on `your-ip:80`

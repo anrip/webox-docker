@@ -2,8 +2,7 @@
 #
 
 apk add --no-cache nginx \
-    nginx-mod-http-image-filter \
-    nginx-mod-stream
+    nginx-mod-http-image-filter
 
 rm -rf /etc/init.d/nginx
 rm -rf /var/lib/nginx/*
