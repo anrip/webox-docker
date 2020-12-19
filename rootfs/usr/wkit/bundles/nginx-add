@@ -1,7 +1,5 @@
-#!/bin/sh
+#!/bin/sh -e
 #
-
-set -xe
 
 apk add --no-cache nginx \
     nginx-mod-http-image-filter

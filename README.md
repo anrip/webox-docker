@@ -50,7 +50,6 @@ For example, add some PHP extension modules:
 ```shell
     echo "#!/bin/sh" > /MY/config/init.d/s3-apk-add
     echo "apk add php5-pcntl php5-posix php5-saop" >> /MY/config/init.d/s3-apk-add
-    echo "apk add php5-maxminddb php5-pecl-imagick" >> /MY/config/init.d/s3-apk-add
     docker restart MYBOX
 ```
 
