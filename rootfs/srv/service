@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-
-if mount | grep -q /opt/etc; then
-    cp -a /opt/etc/* /srv/etc/
-    date >/srv/etc/aulock
-fi
-
-/srv/cell/wkit/service "$@"

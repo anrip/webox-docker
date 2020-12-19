@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+
+if [ -z "$WBX_APPS" ]; then
+    export WBX_APPS="mysql nginx php5 redis"
+fi
+
+#====================================================================#
+
+wbx_single() {
+
+    if [ -x /usr/wkit/services/$1 ]; then
+        /usr/wkit/services/$1 $2
+    else
+        echo "[wkit] invalid app: $1"
+    fi
+
+}
+
+wbx_multiple() {
+
+    local NAME
+
+    for NAME in $WBX_APPS; do
+        wbx_single $NAME $1
+    done
+
+}
+
+#====================================================================#
+
+if [ $# -eq 0 ]; then
+    echo "now, using the wkit shell"
+    exec /bin/sh
+fi
+
+if [ $# -eq 1 ]; then
+    wbx_multiple $1
+    exit $?
+fi
+
+wbx_single "$@"

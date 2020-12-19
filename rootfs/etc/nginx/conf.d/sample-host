@@ -1,0 +1,26 @@
+
+server {
+
+    listen 80;
+
+    server_name www.anrip.net;
+
+    set $pool default;
+    set $pooldir /var/www/$pool;
+
+    if ($host ~ ^([^\.]+)\.([^\.]+)$) {
+        rewrite ^/?(.*)$ http://www.$host/$1 last;
+    }
+    if ($host ~* ([^\.]+)\.([^\.]+)\.([a-z]+)$) {
+        set $sitedir $pooldir/$3.$2.$1;
+    }
+
+    root  $sitedir;
+    index index.php index.htm index.html;
+  # try_files $uri $uri/ /index.php$is_args$args;
+
+    include extra.d/server_error_page;
+
+    include extra.d/server_fastcgi_php;
+
+}

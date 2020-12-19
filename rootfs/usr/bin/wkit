@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+
+if [ -d /var/config ]; then
+    chmod +x / `grep '^#!/bin' -rl /var/config`
+    cp -a /var/config/* /etc/
+fi
+
+/usr/wkit/service "$@"

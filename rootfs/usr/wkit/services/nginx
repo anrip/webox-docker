@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+
+. /usr/wkit/appinit
+
+#====================================================================#
+
+APP_NAME=nginx
+
+APP_USER=nginx
+APP_GROUP=nginx
+
+APP_BIN_FILE=/usr/sbin/nginx
+APP_PID_FILE=/var/run/nginx/nginx.pid
+
+#====================================================================#
+
+app_stop() {
+
+    $APP_BIN_FILE -s stop
+
+}
+
+app_reload() {
+
+    $APP_BIN_FILE -s reload
+
+}
+
+app_prepare() {
+
+    local SDIR
+
+    local ZONE=/etc/nginx/extra.d/proxy_zone
+
+    for SDIR in `awk '$1=="proxy_cache_path" {print $2}' $ZONE*`; do
+        mkdir -p $SDIR
+    done
+
+    app_varfix log run tmp
+
+}
+
+#====================================================================#
+
+app_do $1

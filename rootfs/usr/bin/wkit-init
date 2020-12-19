@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+
+if [ -d /var/config ]; then
+    chmod +x / `grep '^#!/bin' -rl /var/config`
+    cp -a /var/config/* /etc/
+fi
+
+if [ -d /etc/init.d ]; then
+    rm -f `grep openrc -rl /etc/init.d`
+    run-parts -a start /etc/init.d
+fi
+
+if [ -d /etc/crontabs ]; then
+    crond -c /etc/crontabs
+fi
+
+echo "well done !"

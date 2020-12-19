@@ -1,0 +1,206 @@
+#!/bin/sh
+#
+
+export APP_NAME=app
+
+export APP_USER=root
+export APP_GROUP=root
+
+export APP_BIN_FILE=/usr/bin/app
+export APP_PID_FILE=/var/run/app.pid
+
+#====================================================================#
+
+app_start() {
+
+    $APP_BIN_FILE
+
+}
+
+app_stop() {
+
+    kill -TERM `cat $APP_PID_FILE`
+
+}
+
+app_reload() {
+
+    kill -HUP `cat $APP_PID_FILE`
+
+}
+
+app_prepare() {
+
+    app_varfix lib log run tmp
+
+}
+
+#====================================================================#
+
+app_do() {
+
+    app_helper $1 || exit 1
+
+    app_do_$1
+    app_result $1
+
+}
+
+app_do_start() {
+
+    if app_is_start; then
+        echo "$APP_NAME is running"
+        exit 1
+    fi
+
+    if [ ! -d /var/webox/$APP_NAME ]; then
+        mkdir -p /var/webox/$APP_NAME
+        echo "prepare $APP_NAME ..."
+        app_prepare
+    fi
+
+    echo "start $APP_NAME ..."
+    app_start
+
+    app_wait start
+
+}
+
+app_do_stop() {
+
+    if app_is_stop; then
+        echo "$APP_NAME is stopped"
+        exit 1
+    fi
+
+    echo "stop $APP_NAME ..."
+    app_stop
+
+    app_wait stop
+
+}
+
+app_do_reload() {
+
+    if app_is_stop; then
+        echo "$APP_NAME is stopped"
+        exit 1
+    fi
+
+    echo "reload $APP_NAME ..."
+    app_reload
+
+}
+
+app_do_restart() {
+
+    app_do_stop && app_do_start
+
+}
+
+app_do_status() {
+
+    if app_is_start; then
+        echo "$APP_NAME is running"
+    else
+        echo "$APP_NAME is stopped"
+    fi
+
+}
+
+app_is_start() {
+
+    if [ ! -f $APP_PID_FILE ]; then
+        return 1
+    fi
+
+    if ! kill -0 `cat $APP_PID_FILE` 2>/dev/null; then
+        rm -f $APP_PID_FILE
+        return 1
+    fi
+
+}
+
+app_is_stop() {
+
+    ! app_is_start
+
+}
+
+#====================================================================#
+
+app_wait() {
+
+    sleep 1
+
+    local i=${2:-15}
+
+    while ! app_is_$1; do
+        i=`expr $i - 1`
+        if [ $i -eq 0 ]; then
+            break
+        fi
+        sleep 1
+    done
+
+    app_is_$1
+
+}
+
+app_helper() {
+
+    local DOES="start|stop|reload|restart|status"
+
+    if ! echo "|$DOES|" | grep -q "|$1|"; then
+        echo "Usage: /service $APP_NAME {$DOES}"
+        exit 1
+    fi
+
+}
+
+app_result() {
+
+    local CODE=$?
+
+    local RIGHT=${2:-done}
+    local ERROR=${3:-failed}
+
+    if [ $CODE -eq 0 ]; then
+        echo "$1 $APP_NAME $RIGHT"
+    else
+        echo "$1 $APP_NAME $ERROR"
+    fi
+
+    exit $CODE
+
+}
+
+#====================================================================#
+
+app_varfix() {
+
+    local EDIR SDIR
+
+    EDIR=/etc/$APP_NAME
+    [ -d $EDIR ] && chown -R 0:0 $EDIR
+
+    for SDIR in ${@:-log}; do
+        mkdir -p /var/$SDIR/$APP_NAME
+        app_ownmod /var/$SDIR/$APP_NAME
+    done
+
+}
+
+app_ownmod() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    if [ -f $1/ibdata1 ]; then
+        find $1 \( ! -perm 0640 -type f \) -exec chmod 0640 {} \;
+        find $1 \( ! -perm 0750 -type d \) -exec chmod 0750 {} \;
+    else
+        find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+        find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    fi
+
+}

@@ -1,0 +1,27 @@
+##
+# Server - Image Filter
+##
+
+if ($args ~ ^r\d+x\d+$) {
+    rewrite ^(.+)$ $1/$args? last;
+}
+location ~* \.(gif|png|jpg|jpeg)/r(\d+)x(\d+)$ {
+    rewrite ^(.+)/r(\d+)x(\d+)$ $1 break;
+    proxy_pass $scheme://127.0.0.1;
+    proxy_set_header Host $host;
+    image_filter resize $2 $3;
+    image_filter_buffer   24M;
+    image_filter_interlace on;
+}
+
+if ($args ~ ^c\d+x\d+$) {
+    rewrite ^(.+)$ $1/$args? last;
+}
+location ~* \.(gif|png|jpg|jpeg)/c(\d+)x(\d+)$ {
+    rewrite ^(.+)/c(\d+)x(\d+)$ $1 break;
+    proxy_pass $scheme://127.0.0.1;
+    proxy_set_header Host $host;
+    image_filter crop   $2 $3;
+    image_filter_buffer   24M;
+    image_filter_interlace on;
+}

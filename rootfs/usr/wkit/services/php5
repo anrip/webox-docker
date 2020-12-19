@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+
+. /usr/wkit/appinit
+
+#====================================================================#
+
+APP_NAME=php5
+
+APP_USER=daemon
+APP_GROUP=daemon
+
+APP_BIN_FILE=/usr/sbin/php-fpm5
+APP_PID_FILE=/var/run/php5/fpm.pid
+
+#====================================================================#
+
+app_reload() {
+
+    kill -USR2 `cat $APP_PID_FILE`
+
+}
+
+app_prepare() {
+
+    for POOL in `ls /etc/php5/php-fpm.d/`; do
+        POOL=${POOL%.*}
+        mkdir -p /var/www/${POOL}
+        mkdir -p /var/log/php5/${POOL}
+        mkdir -p /var/tmp/php5/${POOL}/upload
+        mkdir -p /var/tmp/php5/${POOL}/session
+    done
+
+    app_ownmod /var/www &
+
+    app_varfix log run tmp
+
+}
+
+#====================================================================#
+
+app_do $1

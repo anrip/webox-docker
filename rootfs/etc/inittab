@@ -2,4 +2,4 @@
 # https://github.com/mirror/busybox/blob/master/examples/inittab
 #
 
-::sysinit:/srv/sbin/sys-init
+::sysinit:/usr/bin/wkit-init

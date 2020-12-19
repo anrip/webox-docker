@@ -1,0 +1,5 @@
+##
+# Proxy - Cache Zone
+##
+
+proxy_cache_path /var/tmp/nginx/pzone_a1 levels=1:2 use_temp_path=off keys_zone=pzone_a1:64m inactive=10d max_size=8g;

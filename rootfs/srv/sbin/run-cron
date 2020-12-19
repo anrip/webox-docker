@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-
-if [ -d /srv/etc/cron.$1 ]; then
-    run-parts /srv/etc/cron.$1
-fi

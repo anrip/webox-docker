@@ -1,4 +1,0 @@
-#!/bin/sh
-#
-
-/srv/cell/wkit/service start

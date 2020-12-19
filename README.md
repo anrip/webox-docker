@@ -1,77 +1,64 @@
-# Supported tags
-
-[v12](https://github.com/anrip/webox-docker/tree/v12.x) -- with php-7.4.x
-
-[v11](https://github.com/anrip/webox-docker/tree/v11.x) -- with php-7.3.x
-
-[v10](https://github.com/anrip/webox-docker/tree/v10.x) -- with php-5.6.x
-
 # What is Webox?
 
-Webox (`abbreviation for web-box`) is a customized lnmp server. It supports running on most linux distributions, such as alpine, CentOS, Debian, and Ubuntu.
+Re sail from alpine !
 
-`v10` tag contains the following modules: mysql, nginx, nodejs, php, redis. And some popular plug-ins have been added, such as geoip2, imagick ...
+Webox (`abbreviation for web-box`) is a customized LNMP server, which includes the following components: MariaDB, Nginx, PHP, Redis. And add some popular plug-ins.
 
-- mysql 5.7.x
+This is a lightweight branch that contains only the following components:
 
-- nginx 1.19.x
+- nginx 1.18.x
 
   - image-filter
-  - maxminddb(geoip2)
-  - njs
-
-- node 14.4.x
 
 - php 5.6.x
 
   - redis
 
-- redis 6.0.x
-
 # Simple Usage
 
-## the web server is listening on `your-ip:80`
+## The web server is listening on `your-ip:80`
 
 ```shell
-docker run --name mybox -d -P \
-    -v /mnt/mybox:/srv/var \
-    vmlu/webox:v10
+docker run --name MYBOX -d -P \
+    -v /MY/htdoc:/var/www/default \
+    vmlu/webox
 ```
 
-## put your files to host's webroot
+## Put your files to host's webroot
 
-If the domain is `www.anrip.net`, the webroot will be `/mnt/mybox/www/default/net.anrip.www/`
+If the domain is `www.anrip.net`, the webroot will be `/MY/htdoc/net.anrip.www/`.
 
 # Manual Control Services
 
-## set `WBX_APPS`, you can start some modules you need
+## Set `WBX_APPS`, you can start the components you need
 
 ```shell
-docker run --name mybox -d -P \
-    -v /mnt/mybox/etc:/srv/etc \
-    -v /mnt/mybox/var:/srv/var \
-    --env 'WBX_APPS=nginx php' \
-    vmlu/webox:v10
+docker run --name MYBOX -d -P \
+    -v /MY/htdoc:/var/www/default \
+    -v /MY/config:/var/config \
+    --env 'WBX_APPS=nginx php5' \
+    vmlu/webox
 ```
 
-## service management command
+## Service management command
 
 ```shell
-docker exec -it mybox /srv/service [start|stop|restart|reload]
+docker exec -it MYBOX wkit [start|stop|restart|reload]
 ```
 
-## configure the modules you need
+## Configure the components you need
 
-please edit the config files in `/mnt/mybox/etc/*`, then reload the service
+You can place additional config files in `/MY/config/*`, these files will be copied to `{MYBOX}/etc` and take effect.
 
-# Important Notice
-
-## don't forget change mysql password
+For example, add some PHP extension modules:
 
 ```shell
-docker exec -it mybox /srv/bin/mysqladmin password a1B2c3E4
+    echo "#!/bin/sh" > /MY/config/init.d/s3-apk-add
+    echo "apk add php5-pcntl php5-posix php5-saop" >> /MY/config/init.d/s3-apk-add
+    echo "apk add php5-maxminddb php5-pecl-imagick" >> /MY/config/init.d/s3-apk-add
+    docker restart MYBOX
 ```
 
 # More Issues
 
-See https://github.com/anrip/webox-docker/issues for more issues
+See https://github.com/anrip/webox-docker/issues for more issues.

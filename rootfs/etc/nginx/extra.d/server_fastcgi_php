@@ -1,0 +1,27 @@
+##
+# Server - Fastcgi
+##
+
+location ~ \.php$ {
+
+    include fastcgi_params;
+
+    if ($safedir = "") {
+        set $safedir $sitedir;
+    }
+    set $safedir /var/tmp/php5/$pool:$safedir;
+
+    fastcgi_param PHP_ADMIN_VALUE "open_basedir=$safedir";
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+    fastcgi_pass  unix:/var/run/php5/$pool.sock;
+    fastcgi_index index.php;
+
+    fastcgi_buffers 256 4k;
+
+    fastcgi_send_timeout 300;
+    fastcgi_read_timeout 300;
+
+    fastcgi_intercept_errors on;
+
+}

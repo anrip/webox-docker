@@ -3,34 +3,16 @@
 
 set -xe
 
-#####################################################################
+chmod +x `grep '^#!/bin' -rl /deploy`
 
-cd ~
+cp -a /deploy/usr /
 
-name=webox-linux-v10.tgz
+for NAME in mysql nginx php5 redis; do
+    install=/usr/wkit/bundles/$NAME-add
+    $install && rm -f $install
+done
 
-wget -O ${name} http://get.vmlu.com/webox/${name}?v10.4.3
-tar -xf ${name} && rm -f ${name}
+cp -a /deploy/etc /
+cp -a /deploy/var /
 
-rm -r ~/srv/etc/nginx/*/sample-*
-rm -r ~/srv/var/www/default/*
-rm -f ~/srv/service
-
-cp -a ~/srv/* /srv/
-rm -r ~/srv
-
-#####################################################################
-
-rm -rf /srv/var/run
-ln -sf /run /srv/var/run
-
-cp -a /srv/etc /srv/var /opt/
-
-#####################################################################
-
-chmod +x /srv/sbin/run-cron
-chmod +x /srv/sbin/sys-init
-chmod +x /srv/etc/init.d/*
-chmod +x /srv/service
-
-rm -f /deploy
+rm -r /deploy
