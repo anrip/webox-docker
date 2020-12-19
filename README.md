@@ -30,13 +30,10 @@ If the domain is `www.anrip.net`, the webroot will be `/MY/htdoc/net.anrip.www/`
 
 # Manual Control Services
 
-## Set `WBX_APPS`, you can start the components you need
-
 ```shell
 docker run --name MYBOX -d -P \
     -v /MY/htdoc:/var/www/default \
     -v /MY/config:/var/config \
-    --env 'WBX_APPS=nginx php5' \
     vmlu/webox
 ```
 

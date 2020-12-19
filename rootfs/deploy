@@ -7,7 +7,7 @@ chmod +x `grep '^#!/bin' -rl /deploy`
 
 cp -a /deploy/usr /
 
-for NAME in mysql nginx php5 redis; do
+for NAME in nginx php5; do
     install=/usr/wkit/bundles/$NAME-add
     $install && rm -f $install
 done

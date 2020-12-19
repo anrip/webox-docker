@@ -2,7 +2,7 @@
 #
 
 if [ -z "$WBX_APPS" ]; then
-    export WBX_APPS="mysql nginx php5 redis"
+    export WBX_APPS="nginx php5"
 fi
 
 #====================================================================#
