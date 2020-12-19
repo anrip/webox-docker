@@ -1,6 +1,8 @@
 #!/bin/sh
 #
 
+set -xe
+
 apk add --no-cache php5 php5-fpm \
     php5-bcmath \
     php5-bz2 \
@@ -23,7 +25,6 @@ apk add --no-cache php5 php5-fpm \
     php5-sqlite3 \
     php5-xml \
     php5-xmlreader \
-    php5-xmlwriter \
     php5-xsl \
     php5-zip
 

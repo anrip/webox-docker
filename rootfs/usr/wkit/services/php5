@@ -10,7 +10,7 @@ APP_NAME=php5
 APP_USER=daemon
 APP_GROUP=daemon
 
-APP_BIN_FILE=/usr/sbin/php-fpm5
+APP_BIN_FILE=/usr/bin/php-fpm5
 APP_PID_FILE=/var/run/php5/fpm.pid
 
 #====================================================================#
