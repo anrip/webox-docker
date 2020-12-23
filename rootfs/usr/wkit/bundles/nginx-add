@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 #
 
-set -xe
-
 apk add --no-cache nginx \
-    nginx-mod-http-image-filter
+    nginx-mod-http-image-filter \
+    nginx-mod-stream
 
 rm -rf /etc/init.d/nginx
 rm -rf /var/lib/nginx/*

@@ -1,7 +1,5 @@
-#!/bin/sh
+#!/bin/sh -e
 #
-
-set -xe
 
 apk add --no-cache php5 php5-fpm \
     php5-bcmath \
