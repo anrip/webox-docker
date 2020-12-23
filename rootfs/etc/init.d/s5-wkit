@@ -1,4 +1,4 @@
 #!/bin/sh
 #
 
-/usr/wkit/service start
+/usr/wkit/service "$@"

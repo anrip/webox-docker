@@ -11,8 +11,4 @@ if [ -d /etc/init.d ]; then
     run-parts -a start /etc/init.d
 fi
 
-if [ -d /etc/crontabs ]; then
-    crond -c /etc/crontabs
-fi
-
 echo "well done !"

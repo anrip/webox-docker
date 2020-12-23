@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+
+if [ "$1" == "start" ]; then
+
+    if [ -d /var/config/periodic ]; then
+        crond -c /etc/crontabs
+    fi
+
+fi

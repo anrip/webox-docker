@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+
+if [ "$1" == "start" ]; then
+
+    if [ -x /etc/rc.local ]; then
+        /etc/rc.local
+    fi
+
+fi
