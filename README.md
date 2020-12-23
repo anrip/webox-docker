@@ -6,7 +6,7 @@ Webox (`abbreviation for web-box`) is a customized LNMP server, which includes t
 
 This is a lightweight branch that contains only the following components:
 
-- nginx 1.18.x
+- nginx 1.11.14.x
 
   - image-filter
 
@@ -50,7 +50,6 @@ For example, add some PHP extension modules:
 ```shell
     echo "#!/bin/sh" > /MY/config/init.d/s3-apk-add
     echo "apk add php5-pcntl php5-posix php5-saop" >> /MY/config/init.d/s3-apk-add
-    echo "apk add php5-maxminddb php5-pecl-imagick" >> /MY/config/init.d/s3-apk-add
     docker restart MYBOX
 ```
 
