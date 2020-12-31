@@ -7,6 +7,8 @@ fi
 
 find rootfs/ -type f -exec dos2unix {} \;
 
+#====================================================================#
+
 docker build -t dev/webox .
 sleep 3
 

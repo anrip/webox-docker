@@ -11,7 +11,7 @@ strip /usr/lib/php7/modules/swoole.so
 
 apk del build-deps
 
-#===========================================================#
+#====================================================================#
 
 echo "extension=swoole.so" > /etc/php7/conf.d/swoole.ini
 
