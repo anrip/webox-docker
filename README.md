@@ -6,7 +6,7 @@ Webox (`abbreviation for web-box`) is a customized LNMP server, which includes t
 
 This is a lightweight branch that contains only the following components:
 
-- nginx 1.11.14.x
+- nginx 1.11.x
 
   - image-filter
 

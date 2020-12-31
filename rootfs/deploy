@@ -5,7 +5,7 @@ chmod +x `grep '^#!/bin' -rl /deploy`
 
 cp -a /deploy/usr /
 
-for NAME in nginx php5; do
+for NAME in $WBX_APPS; do
     install=/usr/wkit/bundles/$NAME-add
     $install && rm -f $install
 done
