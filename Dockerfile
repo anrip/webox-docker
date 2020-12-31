@@ -5,8 +5,8 @@ LABEL version="0.0.0" \
 
 ENV WBX_APPS="mysql nginx php7 redis"
 
-ADD rootfs /deploy
-RUN sh /deploy/deploy
+ADD rootfs /bld
+RUN sh /bld/deploy
 
 ENTRYPOINT ["/sbin/init"]
 
