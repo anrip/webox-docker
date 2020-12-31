@@ -56,9 +56,9 @@ You can place additional config files in `/MY/config/*`, these files will be cop
 For example, add some PHP extension modules:
 
 ```shell
-    echo "#!/bin/sh" > /MY/config/init.d/s3-apk-add
-    echo "apk add php7-pcntl php7-posix php7-saop" >> /MY/config/init.d/s3-apk-add
-    echo "apk add php7-maxminddb php7-pecl-imagick" >> /MY/config/init.d/s3-apk-add
+    echo "#!/bin/sh" > /MY/config/init.d/s3-preload
+    echo "apk add php7-pcntl php7-posix php7-saop" >> /MY/config/init.d/s3-preload
+    echo "apk add php7-maxminddb php7-pecl-imagick" >> /MY/config/init.d/s3-preload
     docker restart MYBOX
 ```
 
