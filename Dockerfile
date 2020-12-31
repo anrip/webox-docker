@@ -5,8 +5,8 @@ LABEL version="10.5.0" \
 
 ENV WBX_APPS="nginx php5"
 
-ADD rootfs /deploy
-RUN sh /deploy/deploy
+ADD rootfs /bld
+RUN sh /bld/deploy
 
 ENTRYPOINT ["/sbin/init"]
 

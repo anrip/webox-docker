@@ -1,16 +1,16 @@
 #!/bin/sh -e
 #
 
-chmod +x `grep '^#!/bin' -rl /deploy`
+chmod +x `grep '^#!/bin' -rl /bld`
 
-cp -a /deploy/usr /
+cp -a /bld/usr /
 
 for NAME in $WBX_APPS; do
     install=/usr/wkit/bundles/$NAME-add
     $install && rm -f $install
 done
 
-cp -a /deploy/etc /
-cp -a /deploy/var /
+cp -a /bld/etc /
+cp -a /bld/var /
 
-rm -r /deploy
+rm -r /bld
