@@ -6,4 +6,9 @@ if [ -d /var/config ]; then
     cp -a /var/config/* /etc/
 fi
 
+if [ -x /usr/wkit/bundles/$1 ]; then
+    /usr/wkit/bundles/$@
+    exit $?
+fi
+
 /usr/wkit/service "$@"

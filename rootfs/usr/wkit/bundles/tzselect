@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+
+echo "Fetching timezone profiles ..."
+apk add -q --no-cache tzdata
+
+sleep 3 && apk del -q --purge tzdata &
+
+if [ ! -e /usr/share/zoneinfo/$1 ]; then
+    echo "ERR: $1 not found"
+    exit 1
+fi
+
+cp -a /usr/share/zoneinfo/$1 /etc/localtime
+echo "Timezone is set to $1"
