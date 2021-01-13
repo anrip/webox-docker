@@ -31,7 +31,7 @@ app_prepare() {
 
     local SDIR
 
-    local ZONE=/etc/nginx/extra.d/proxy_zone
+    local ZONE=/etc/nginx/http.d/proxy_zone
 
     for SDIR in `awk '$1=="proxy_cache_path" {print $2}' $ZONE*`; do
         mkdir -p $SDIR
