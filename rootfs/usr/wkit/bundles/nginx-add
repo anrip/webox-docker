@@ -6,6 +6,7 @@ apk add --no-cache nginx \
     nginx-mod-stream
 
 rm -rf /etc/init.d/nginx
+rm -rf /etc/nginx/http.d
 rm -rf /var/lib/nginx/*
 rm -rf /var/www/localhost
 
