@@ -1,8 +1,0 @@
-[mysqld]
-
-skip-name-resolve
-
-symbolic-links  = OFF
-
-slow_query_log  = ON
-long_query_time = 30
