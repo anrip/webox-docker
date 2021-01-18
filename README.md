@@ -10,7 +10,7 @@ This is a lightweight branch that contains only the following components:
 
   - image-filter
 
-- php 7.3.x
+- php 7.4.x
 
 # Simple Usage
 
