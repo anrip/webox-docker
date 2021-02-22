@@ -6,3 +6,14 @@ symbolic-links  = OFF
 
 slow_query_log  = ON
 long_query_time = 30
+
+#
+# * Logging
+#
+
+log_bin             = /var/log/mysql/bin-log
+relay_log           = /var/log/mysql/relay-log
+
+log_error           = /var/log/mysql/error.log
+general_log_file    = /var/log/mysql/mysql.log
+slow_query_log_file = /var/log/mysql/slow.log
