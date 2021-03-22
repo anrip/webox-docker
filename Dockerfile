@@ -5,8 +5,8 @@ LABEL version="14.1.0" \
 
 ENV WBX_APPS="nginx php7"
 
-ADD rootfs /bld
-RUN sh /bld/deploy
+ADD initfs /ifs
+RUN sh /ifs/deploy
 
 ENTRYPOINT ["/sbin/init"]
 
