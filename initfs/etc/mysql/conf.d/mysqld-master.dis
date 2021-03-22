@@ -1,0 +1,15 @@
+[mysqld]
+
+server_id = 11
+
+expire_logs_days = 7
+max_binlog_size  = 1000M
+
+log_bin = /var/log/mysql/bin-log
+
+####################################################################################################
+#
+# FLUSH TABLES WITH READ LOCK;
+# SHOW MASTER STATUS;
+# UNLOCK TABLES;
+#

@@ -1,0 +1,21 @@
+[mysqld]
+
+server_id = 22
+
+expire_logs_days = 7
+max_binlog_size  = 1000M
+
+relay_log = /var/log/mysql/relay-log
+
+relay_log_recovery = ON
+
+slave_skip_errors = 1032,1062,126,1114,1146,1048,1396
+
+replicate_wild_ignore_table = mysql.%
+
+####################################################################################################
+#
+# STOP SLAVE;
+# CHANGE MASTER TO MASTER_HOST='10.0.0.11', MASTER_PORT=3306, MASTER_USER='COPY', MASTER_PASSWORD='123456', MASTER_LOG_FILE='BIN-LOG.000001', MASTER_LOG_POS=123;
+# START SLAVE; SHOW SLAVE STATUS;
+#
