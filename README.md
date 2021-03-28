@@ -39,6 +39,7 @@ If the domain is `www.anrip.net`, the webroot will be `/MY/htdoc/net.anrip.www/`
 docker run --name MYBOX -d -P \
     -v /MY/htdoc:/var/www/default \
     -v /MY/config:/var/config \
+    --env 'TIMEZONE=Asia/Shanghai' \
     --env 'WBX_APPS=nginx php7' \
     vmlu/webox
 ```
