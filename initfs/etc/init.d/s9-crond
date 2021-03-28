@@ -3,7 +3,7 @@
 
 if [ "$1" == "start" ]; then
 
-    if [ -d /var/config/periodic ]; then
+    if grep -rq '^#!/bin' /etc/periodic; then
         crond -c /etc/crontabs
     fi
 
