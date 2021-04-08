@@ -1,18 +1,33 @@
 #!/bin/sh -e
 #
 
+cd /tmp
+
 apk add --no-cache --virtual build-deps \
-    build-base openssl-dev php7-pear php7-dev
+    build-base curl-dev openssl-dev php7-pear php7-dev
 
 pecl channel-update pecl.php.net
 
-pecl install swoole
+pecl bundle swoole
+
+cd swoole && phpize
+
+./configure \
+    --enable-sockets \
+    --enable-openssl \
+    --enable-http2 \
+    --enable-mysqlnd \
+    --enable-swoole-json \
+    --enable-swoole-curl
+
+make
+make install
+
 strip /usr/lib/php7/modules/swoole.so
 
 apk del build-deps
+rm -rf /tmp/*
 
 #====================================================================#
 
-echo "extension=swoole.so" > /etc/php7/conf.d/swoole.ini
-
-apk add --no-cache php7-pcntl php7-posix
+echo "extension=swoole.so" > /etc/php7/conf.d/50_swoole.ini
