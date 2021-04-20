@@ -26,6 +26,5 @@ apk add --no-cache php5 php5-fpm \
     php5-xsl \
     php5-zip
 
-rm -rf /etc/init.d/php5
 rm -rf /etc/php5/php-fpm.d
 rm -rf /var/lib/php5

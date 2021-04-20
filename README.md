@@ -24,7 +24,7 @@ docker run --name MYBOX -d -P \
 
 ## Put your files to host's webroot
 
-If the domain is `www.anrip.net`, the webroot will be `/MY/htdoc/net.anrip.www/`.
+If the domain is `www.example.org`, the webroot will be `/MY/htdoc/org.example.www/`.
 
 # Manual Control Services
 
@@ -38,7 +38,7 @@ docker run --name MYBOX -d -P \
 
 ## ENV Variables
 
- - `WBX_APPS`, Set up automatically started services
+- `WBX_APPS`, Set up automatically started services
 
 - `TIMEZONE`, Set time zone
 
@@ -55,8 +55,9 @@ You can place additional config files in `/MY/config/*`, these files will be cop
 For example, add some PHP extension modules:
 
 ```shell
-    echo "#!/bin/sh" > /MY/config/init.d/s3-preload
-    echo "apk add php5-pcntl php5-posix php5-saop" >> /MY/config/init.d/s3-preload
+    echo "#!/bin/sh" > /MY/config/local.d/s3-preload
+    echo "apk add php5-pcntl php5-posix php5-saop" >> /MY/config/local.d/s3-preload
+    echo "rm /MY/config/local.d/s3-preload" >> /MY/config/local.d/s3-preload
     docker restart MYBOX
 ```
 
