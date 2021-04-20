@@ -36,6 +36,12 @@ docker run --name MYBOX -d -P \
     vmlu/webox
 ```
 
+## ENV Variables
+
+ - `WBX_APPS`, Set up automatically started services
+
+- `TIMEZONE`, Set time zone
+
 ## Service management command
 
 ```shell
