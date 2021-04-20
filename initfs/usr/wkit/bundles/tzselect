@@ -12,4 +12,6 @@ if [ ! -e /usr/share/zoneinfo/$1 ]; then
 fi
 
 cp -a /usr/share/zoneinfo/$1 /etc/localtime
+echo $1 >/etc/timezone
+
 echo "Timezone is set to $1"
