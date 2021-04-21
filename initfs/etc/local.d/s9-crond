@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+
+if [ -d /var/config/periodic ]; then
+    crond -c /etc/crontabs
+fi

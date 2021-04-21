@@ -16,4 +16,4 @@ if echo "$@" | grep -q 'permit-root'; then
     fi
 fi
 
-rm -rf /etc/init.d/ssh
+rm -rf /etc/local.d/ssh

@@ -34,6 +34,5 @@ apk add --no-cache php7 php7-fpm \
     php7-xsl \
     php7-zip
 
-rm -rf /etc/init.d/php7
 rm -rf /etc/php7/php-fpm.d
 rm -rf /var/lib/php7
