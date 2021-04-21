@@ -66,19 +66,41 @@ docker run --name MYBOX -d -P \
 docker exec -it MYBOX wkit [start|stop|restart|reload]
 ```
 
-## Configure the components you need
-
-You can place additional config files in `/MY/config/*`, these files will be copied to `{MYBOX}/etc` and take effect.
-
-For example, add some PHP extension modules:
+## Add some PHP extension modules
 
 ```shell
-    echo "#!/bin/sh" > /MY/config/local.d/s3-preload
-    echo "apk add php7-maxminddb php7-pecl-imagick" >> /MY/config/local.d/s3-preload
-    echo "apk add php7-pcntl php7-posix php7-saop" >> /MY/config/local.d/s3-preload
-    echo "rm /MY/config/local.d/s3-preload" >> /MY/config/local.d/s3-preload
-    docker restart MYBOX
+docker exec -it MYBOX apk add \
+    php7-pcntl php7-posix php7-saop \
+    php7-maxminddb php7-pecl-imagick
 ```
+
+## Configure the components you need
+
+You can place additional config files in `/MY/config/*`, these files will be copied to `{MYBOX}/etc` and take effect on next restart.
+
+- Configure mariadb
+
+  - /MY/config/mysql/conf.d/\*
+
+- Configure virtual host
+
+  - /MY/config/nginx/host.d/\*
+
+- Configure php7
+
+  - /MY/config/php7/conf.d/\*
+
+- Configure redis
+
+  - /MY/config/redis/redis.conf
+
+- Scripts in the following locations will be run when `MYBOX` started:
+
+  - /MY/config/rc.local
+  - /MY/config/local.d/\*
+  - /MY/config/local.d/s3-prewkit
+  - /MY/config/local.d/s5-wkit
+  - /MY/config/local.d/s6-postwkit
 
 # Important Notice
 
