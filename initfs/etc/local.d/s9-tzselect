@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+
+if [ -n "$TIMEZONE" ]; then
+    wkit tzselect $TIMEZONE
+fi
+
+rm -f $0

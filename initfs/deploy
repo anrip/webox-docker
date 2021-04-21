@@ -3,6 +3,8 @@
 
 chmod +x `grep '^#!/bin' -rl /ifs`
 
+# install apps
+
 cp -a /ifs/usr /
 
 for NAME in $WBX_APPS; do
@@ -12,5 +14,10 @@ done
 
 cp -a /ifs/etc /
 cp -a /ifs/var /
+
+# clean system
+
+rm -f `grep openrc -rl /etc/init.d`
+rm -f /var/cache/apk/*.tar.gz
 
 rm -r /ifs

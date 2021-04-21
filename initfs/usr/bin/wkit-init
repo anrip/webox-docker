@@ -6,9 +6,12 @@ if [ -d /var/config ]; then
     cp -a /var/config/* /etc/
 fi
 
-if [ -d /etc/init.d ]; then
-    rm -f `grep openrc -rl /etc/init.d`
-    run-parts -a start /etc/init.d
+if [ -d /etc/local.d ]; then
+    run-parts -a start /etc/local.d
 fi
 
-echo "well done !"
+if [ -x /etc/rc.local ]; then
+    /etc/rc.local start
+fi
+
+echo "init done !"
