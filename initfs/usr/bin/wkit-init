@@ -2,7 +2,7 @@
 #
 
 if [ -d /var/config ]; then
-    chmod +x / `grep '^#!/bin' -rl /var/config`
+    chmod +x / `grep -rl '^#!/bin' /var/config`
     cp -a /var/config/* /etc/
 fi
 
