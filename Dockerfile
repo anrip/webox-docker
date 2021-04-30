@@ -1,9 +1,9 @@
-FROM alpine:3.13
+FROM alpine:edge
 
-LABEL version="14.1.0" \
+LABEL version="15.0.0" \
       maintainer="mail@anrip.com"
 
-ENV WBX_APPS="nginx php7"
+ENV WBX_APPS="nginx php8"
 
 ADD initfs /ifs
 RUN sh /ifs/deploy
