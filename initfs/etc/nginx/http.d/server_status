@@ -8,5 +8,5 @@ location /status/nginx {
 
 location ~ ^/status/(\w+)$ {
     include      fastcgi_params;
-    fastcgi_pass unix:/var/run/php8/$1.sock;
+    fastcgi_pass unix:/var/run/php7/$1.sock;
 }

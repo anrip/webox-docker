@@ -6,11 +6,11 @@ Webox (`abbreviation for web-box`) is a customized LNMP server, which includes t
 
 This is a lightweight branch that contains only the following components:
 
-- nginx 1.20.x
+- nginx 1.18.x
 
   - image-filter
 
-- php 8.0.x
+- php 7.4.x
 
 # Simple Usage
 
@@ -52,8 +52,8 @@ docker exec -it MYBOX wkit [start|stop|restart|reload]
 
 ```shell
 docker exec -it MYBOX apk add \
-    php8-pcntl php8-posix php8-saop \
-    php8-maxminddb php8-pecl-imagick
+    php7-pcntl php7-posix php7-saop \
+    php7-maxminddb php7-pecl-imagick
 ```
 
 ## Configure the components you need
@@ -64,9 +64,9 @@ You can place additional config files in `/MY/config/*`, these files will be cop
 
   - /MY/config/nginx/host.d/\*
 
-- Configure php8
+- Configure php7
 
-  - /MY/config/php8/conf.d/\*
+  - /MY/config/php7/conf.d/\*
 
 - Scripts in the following locations will be run when `MYBOX` started:
 
