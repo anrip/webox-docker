@@ -10,7 +10,7 @@ Webox (`abbreviation for web-box`) is a customized LNMP server, which includes t
 
   - image-filter
 
-- php 7.4.x
+- php 8.0.x
 
   - redis
 
@@ -22,9 +22,9 @@ Webox (`abbreviation for web-box`) is a customized LNMP server, which includes t
 
 - [latest](https://github.com/anrip/webox-docker/tree/master)
 
-- [nginx-php, nginx-php7, nginx-php7.4](https://github.com/anrip/webox-docker/tree/nginx-php7.4)
+- [nginx-php, nginx-php8, nginx-php8.4](https://github.com/anrip/webox-docker/tree/nginx-php8.4)
 
-- [nginx-php7.3](https://github.com/anrip/webox-docker/tree/nginx-php7.3)
+- [nginx-php8.3](https://github.com/anrip/webox-docker/tree/nginx-php8.3)
 
 - [nginx-php5, nginx-php5.6](https://github.com/anrip/webox-docker/tree/nginx-php5.6)
 
@@ -50,7 +50,7 @@ docker run --name MYBOX -d -P \
     -v /MY/htdoc:/var/www/default \
     -v /MY/config:/var/config \
     -e 'TIMEZONE=Asia/Shanghai' \
-    -e 'WBX_APPS=nginx php7' \
+    -e 'WBX_APPS=nginx php8' \
     vmlu/webox
 ```
 
@@ -70,8 +70,8 @@ docker exec -it MYBOX wkit [start|stop|restart|reload]
 
 ```shell
 docker exec -it MYBOX apk add \
-    php7-pcntl php7-posix php7-saop \
-    php7-maxminddb php7-pecl-imagick
+    php8-pcntl php8-posix php8-saop \
+    php8-maxminddb php8-pecl-imagick
 ```
 
 ## Configure the components you need
@@ -86,9 +86,9 @@ You can place additional config files in `/MY/config/*`, these files will be cop
 
   - /MY/config/nginx/host.d/\*
 
-- Configure php7
+- Configure php8
 
-  - /MY/config/php7/conf.d/\*
+  - /MY/config/php8/conf.d/\*
 
 - Configure redis
 

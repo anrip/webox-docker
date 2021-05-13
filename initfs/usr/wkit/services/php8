@@ -5,13 +5,13 @@
 
 #====================================================================#
 
-APP_NAME=php7
+APP_NAME=php8
 
 APP_USER=daemon
 APP_GROUP=daemon
 
-APP_BIN_FILE=/usr/sbin/php-fpm7
-APP_PID_FILE=/var/run/php7/fpm.pid
+APP_BIN_FILE=/usr/sbin/php-fpm8
+APP_PID_FILE=/var/run/php8/fpm.pid
 
 #====================================================================#
 
@@ -23,12 +23,12 @@ app_reload() {
 
 app_prepare() {
 
-    for POOL in `ls /etc/php7/php-fpm.d/`; do
+    for POOL in `ls /etc/php8/php-fpm.d/`; do
         POOL=${POOL%.*}
         mkdir -p /var/www/${POOL}
-        mkdir -p /var/log/php7/${POOL}
-        mkdir -p /var/tmp/php7/${POOL}/upload
-        mkdir -p /var/tmp/php7/${POOL}/session
+        mkdir -p /var/log/php8/${POOL}
+        mkdir -p /var/tmp/php8/${POOL}/upload
+        mkdir -p /var/tmp/php8/${POOL}/session
     done
 
     app_ownmod /var/www &
